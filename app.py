@@ -13,7 +13,8 @@ st.image('title_image.jpg')
 
 sidebar = st.sidebar
 sidebar.header("Choose Your Option")
-choices = ["Select any option below", "View Dataset", "Analyse Timeline", "Analyse Platform"]
+choices = ["Select any option below", "View Dataset",
+ "Analyse Timeline", "Analyse Platform", "Analyse Region"]
 selOpt = sidebar.selectbox("Choose what to do", choices)
 
 def projectOverview():
@@ -40,6 +41,10 @@ def analysePlatform():
 
     st.bar_chart(analysis.getPlatformSum())
 
+def analyseRegion():
+    st.header("Region wise Sales analysis of Video Games")
+
+    st.bar_chart(analysis.getRegionData("NA_Sales"))
 
 if selOpt == choices[0]:
     projectOverview()
@@ -49,3 +54,5 @@ elif selOpt == choices[2]:
     analyseTimeline()
 elif selOpt == choices[3]:
     analysePlatform()
+elif selOpt == choices[4]:
+    analyseRegion()
