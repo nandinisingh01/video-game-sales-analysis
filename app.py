@@ -20,9 +20,6 @@ def projectOverview():
     st.header('Project Overview')
     st.header("A Not very long description")
 
-    
-
-
 def viewDataset():
     st.header("Dataset Details")
     
