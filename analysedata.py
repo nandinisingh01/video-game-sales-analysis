@@ -19,7 +19,7 @@ class Analyse:
         return self.df.groupby('Platform')['Global_Sales'].sum().sort_values(ascending=True)
 
     def getRegionData(self, region):
-        return self.df[region].sum().sort_values(ascending=True)
+        return self.df.groupby(region).sum().sort_values(region, ascending=False)
 
     def getRegionAndPlatformData(self, region):
-        return self.df.groupby('Platform')[region].sum().sort_values(ascending=True)
+        return self.df.groupby('Platform').sum()[region].sort_values(region, ascending=False)

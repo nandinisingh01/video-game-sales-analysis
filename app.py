@@ -6,6 +6,7 @@ def loadData():
     print('loading..')
     return Analyse('datasets/vgsales.csv')
 
+
 analysis = loadData()
 
 st.title("Video Game Sales Analysis")
@@ -14,16 +15,18 @@ st.image('title_image.jpg')
 sidebar = st.sidebar
 sidebar.header("Choose Your Option")
 choices = ["Select any option below", "View Dataset",
- "Analyse Timeline", "Analyse Platform", "Analyse Region"]
+           "Analyse Timeline", "Analyse Platform", "Analyse Region"]
 selOpt = sidebar.selectbox("Choose what to do", choices)
+
 
 def projectOverview():
     st.header('Project Overview')
     st.header("A Not very long description")
 
+
 def viewDataset():
     st.header("Dataset Details")
-    
+
 
 def analyseTimeline():
     st.header("Timeline analysis")
@@ -41,6 +44,7 @@ def analysePlatform():
 
     st.bar_chart(analysis.getPlatformSum())
 
+
 def analyseRegion():
     st.header("Region wise Sales analysis of Video Games")
 
@@ -55,6 +59,11 @@ elif selOpt == choices[1]:
     viewDataset()
 elif selOpt == choices[2]:
     analyseTimeline()
+elif selOpt == choices[3]:
+    analysePlatform()
+elif selOpt == choices[4]:
+    analyseRegion()
+
 
 def intro():
 
