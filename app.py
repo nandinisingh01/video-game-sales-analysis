@@ -6,6 +6,7 @@ def loadData():
     print('loading..')
     return Analyse('datasets/vgsales.csv')
 
+
 analysis = loadData()
 
 st.title("Video Game Sales Analysis")
@@ -14,12 +15,12 @@ st.image('title_image.jpg')
 sidebar = st.sidebar
 sidebar.header("Choose Your Option")
 choices = ["Select any option below", "View Dataset",
- "Analyse Timeline", "Analyse Platform", "Analyse Region"]
+           "Analyse Timeline", "Analyse Platform", "Analyse Region"]
 selOpt = sidebar.selectbox("Choose what to do", choices)
+
 
 def projectOverview():
     st.header('Project Overview')
-    st.header("A Not very long description")
     st.markdown(""" 
         ### Contains of Project
         1. Rank - Ranking of overall sales
@@ -29,10 +30,29 @@ def projectOverview():
         5. Genre - Genre of the game
         6. Publisher - Publisher of the game
     """)
+    st.markdown("""
+        ### Introduction
+        A video game is an electronic game that can be played on a computing device, such as a personal
+        computer, gaming console or mobile phone. Depending on the platform, video games can be
+        subcategorized into computer games and console games. In recent years, however, the emergence of
+        social networks, smartphones and tablets introduced new categories such as mobile and social games
+        Video games have come a long way since the first games emerged in the 1970s. Today’s video games offer
+        photorealistic graphics and simulate reality to a degree which is astonishing in many cases.
+    """)
+    st.markdown("""
+        ### STATISTICS ON THE TOPIC
+        Global overview
+        U.S. overview
+        Market leaders
+        Hardware market and ownership
+        Software
+        consumer behavior
+    """)
+
 
 def viewDataset():
     st.header("Dataset Details")
-    
+
 
 def analyseTimeline():
     st.header("Timeline analysis")
@@ -49,6 +69,7 @@ def analysePlatform():
     st.markdown('---')
 
     st.bar_chart(analysis.getPlatformSum())
+
 
 def analyseRegion():
     st.header("Region wise Sales analysis of Video Games")
@@ -71,5 +92,3 @@ elif selOpt == choices[3]:
     analysePlatform()
 elif selOpt == choices[4]:
     analyseRegion()
-
-
