@@ -1,5 +1,6 @@
 import streamlit as st
 from analysedata import Analyse
+import plotly.graph_objects as go
 
 
 def loadData():
@@ -84,6 +85,23 @@ def analyseRegion():
     st.bar_chart(analysis.getRegionAndPublisherSum(selRegion, n))
 
     st.bar_chart(analysis.getRegionAndPublisherCount(selRegion, n))
+
+    data = analysis.getRegionSum()
+    fig = plotpie(data.index, data.values, 'Total Region Sales')
+    st.plotly_chart(fig)
+
+
+def plotpie(labels, values, title):
+    layout = go.Layout(title=title)
+    fig = go.Figure(layout=layout)
+
+    fig.add_trace(go.Pie(labels=labels, values=values, textinfo='label+percent', hole=0.2,
+                         marker=dict(colors=['#f7d468', '#74cb35'],
+                                     line_color='Gray',
+                                     line_width=1),
+                         textfont={'color': '#000', 'size': 12},
+                         textfont_size=12))
+    return fig
 
 
 if selOpt == choices[0]:

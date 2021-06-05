@@ -29,3 +29,6 @@ class Analyse:
 
     def getRegionAndPublisherCount(self, region, n):
         return self.df.groupby('Publisher').count().sort_values(region, ascending=False)[region].head(n)
+
+    def getRegionSum(self):
+        return self.df[['NA_Sales', 'EU_Sales', 'JP_Sales', 'Other_Sales']].sum()
