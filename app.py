@@ -73,13 +73,17 @@ def analysePlatform():
 
 def analyseRegion():
     st.header("Region wise Sales analysis of Video Games")
+    n = st.select_slider(
+        options=[i*5 for i in range(1, 11)], label="Select No. of Games")
+    selRegion = st.selectbox(options=[
+        'NA_Sales', 'EU_Sales', 'JP_Sales', 'Other_Sales', 'Global_Sales', ], label="Select Region")
+    st.bar_chart(analysis.getRegionAndPlatformSum(selRegion, n))
 
-    st.bar_chart(analysis.getRegionData("NA_Sales"))
-    st.bar_chart(analysis.getRegionData("EU_Sales"))
-    st.bar_chart(analysis.getRegionData("Global_Sales"))
-    st.bar_chart(analysis.getRegionData("JP_Sales"))
-    st.bar_chart(analysis.getRegionData("Other_Sales"))
-    
+    st.bar_chart(analysis.getRegionAndPlatformCount(selRegion, n))
+
+    st.bar_chart(analysis.getRegionAndPublisherSum(selRegion, n))
+
+    st.bar_chart(analysis.getRegionAndPublisherCount(selRegion, n))
 
 
 if selOpt == choices[0]:

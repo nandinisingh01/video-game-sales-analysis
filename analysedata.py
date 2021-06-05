@@ -18,8 +18,14 @@ class Analyse:
     def getPlatformSum(self):
         return self.df.groupby('Platform')['Global_Sales'].sum().sort_values(ascending=True)
 
-    def getRegionData(self, region):
-        return self.df.groupby(region).sum().sort_values(region, ascending=False)
+    def getRegionAndPlatformSum(self, region, n):
+        return self.df.groupby('Platform').sum().sort_values(region, ascending=False)[region].head(n)
 
-    def getRegionAndPlatformData(self, region):
-        return self.df.groupby('Platform').sum()[region].sort_values(region, ascending=False)
+    def getRegionAndPlatformCount(self, region, n):
+        return self.df.groupby('Platform').count().sort_values(region, ascending=False)[region].head(n)
+
+    def getRegionAndPublisherSum(self, region, n):
+        return self.df.groupby('Publisher').sum().sort_values(region, ascending=False)[region].head(n)
+
+    def getRegionAndPublisherCount(self, region, n):
+        return self.df.groupby('Publisher').count().sort_values(region, ascending=False)[region].head(n)
