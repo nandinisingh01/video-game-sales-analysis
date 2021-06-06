@@ -23,7 +23,7 @@ selOpt = sidebar.selectbox("Choose what to do", choices)
 def projectOverview():
     st.header('Project Overview')
     st.markdown(""" 
-        ### Contains of Project
+        ### CONTAINS OF PROJECT
         1. Rank - Ranking of overall sales
         2. Name - The games name
         3. Platform - Platform of the game release(eg- PC,PS4,etc.)
@@ -32,7 +32,7 @@ def projectOverview():
         6. Publisher - Publisher of the game
     """)
     st.markdown("""
-        ### Introduction
+        ### INTRODUCTION
         A video game is an electronic game that can be played on a computing device, such as a personal
         computer, gaming console or mobile phone. Depending on the platform, video games can be
         subcategorized into computer games and console games. In recent years, however, the emergence of
@@ -49,6 +49,7 @@ def projectOverview():
         Software
         consumer behavior
     """)
+    st.image('game sales.jpg')
 
 
 def viewDataset():
@@ -103,6 +104,7 @@ def plotpie(labels, values, title):
                          textfont_size=12))
     return fig
 
+    
 
 if selOpt == choices[0]:
     projectOverview()
@@ -114,3 +116,4 @@ elif selOpt == choices[3]:
     analysePlatform()
 elif selOpt == choices[4]:
     analyseRegion()
+
