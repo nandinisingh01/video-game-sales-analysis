@@ -42,12 +42,12 @@ def projectOverview():
     """)
     st.markdown("""
         ### STATISTICS ON THE TOPIC
-        Global overview
-        U.S. overview
-        Market leaders
-        Hardware market and ownership
-        Software
-        consumer behavior
+        1. Global overview
+        2. U.S. overview
+        3. Market leaders
+        4. Hardware market and ownership
+        5. Software
+        6. consumer behavior
     """)
     st.image('game sales.jpg')
 
@@ -65,8 +65,10 @@ def analyseTimeline():
     col1.line_chart(analysis.getYearCount())
     col2.bar_chart(analysis.getYearCount())
 
-    col1.line_chart(analysis.getYearSum())
-    col2.bar_chart(analysis.getYearSum())
+    col3, col4 = st.beta_columns(2)
+
+    col3.line_chart(analysis.getYearSum())
+    col4.bar_chart(analysis.getYearSum())
 
 
 def analysePlatform():
@@ -74,6 +76,7 @@ def analysePlatform():
     st.markdown('---')
 
     st.bar_chart(analysis.getPlatformSum())
+
 
 
 def analyseRegion():
