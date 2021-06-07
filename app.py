@@ -77,6 +77,10 @@ def analysePlatform():
 
     st.bar_chart(analysis.getPlatformSum())
 
+    st.line_chart(analysis.getPlatformSum())
+    st.line_chart(analysis.getPlatformCount())
+    
+
 
 
 def analyseRegion():
