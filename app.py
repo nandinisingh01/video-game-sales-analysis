@@ -90,7 +90,9 @@ def analysePlatform():
 
     st.bar_chart(analysis.getPlatformSum())
 
-    # analyse sum and count in line chart
+    st.line_chart(analysis.getPlatformSum())
+    st.line_chart(analysis.getPlatformCount())
+    
 
 
 
