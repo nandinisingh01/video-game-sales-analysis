@@ -65,6 +65,9 @@ def analyseTimeline():
     col1.line_chart(analysis.getYearCount())
     col2.bar_chart(analysis.getYearCount())
 
+    col1.line_chart(analysis.getYearSum())
+    col2.bar_chart(analysis.getYearSum())
+
 
 def analysePlatform():
     st.header("Video Games Platform analysis")
