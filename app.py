@@ -67,11 +67,18 @@ def analyseTimeline():
 
     col3, col4 = st.beta_columns(2)
 
-    col3.line_chart(analysis.getYearSum())
+    col3.line_chart(analysis.getYearSum())  
     col4.bar_chart(analysis.getYearSum())
 
+    centuries = ['2010 - 2016']
 
-# add year sum charts
+    popGames = {
+        centuries[0] : ['PS4', 'PC', '3DS', 'XOne']
+    }
+
+    selPlatforms = popGames[centuries[0]]
+
+    # st.dataframe(analysis.filterPlatform(selPlatforms))
 
 
 # most profitable platform in different centuries

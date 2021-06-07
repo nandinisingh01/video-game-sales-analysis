@@ -13,7 +13,7 @@ class Analyse:
         return self.df.groupby('Year')['Name'].count()
 
     def getYearSum(self):
-        return self.df.groupby('Year')['Name'].sum()
+        return self.df.groupby('Year')['Global_Sales'].sum()
 
     def getPlatformSum(self):
         return self.df.groupby('Platform')['Global_Sales'].sum().sort_values(ascending=True)
@@ -32,3 +32,6 @@ class Analyse:
 
     def getRegionSum(self):
         return self.df[['NA_Sales', 'EU_Sales', 'JP_Sales', 'Other_Sales']].sum()
+
+    def filterPlatform(self, platforms):
+        return self.df[self.df['Platform'].isin(platforms)].groupby('Year').sum()
