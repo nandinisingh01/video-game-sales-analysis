@@ -66,11 +66,19 @@ def analyseTimeline():
     col2.bar_chart(analysis.getYearCount())
 
 
+# add year sum charts
+
+
+# most profitable platform in different centuries
+
+
 def analysePlatform():
     st.header("Video Games Platform analysis")
     st.markdown('---')
 
     st.bar_chart(analysis.getPlatformSum())
+
+    # analyse sum and count in line chart
 
 
 def analyseRegion():
