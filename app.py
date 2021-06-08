@@ -53,7 +53,56 @@ def projectOverview():
 
 
 def viewDataset():
-    st.header("Dataset Details")
+
+    df = analysis.getDataframe()
+
+    with st.spinner("Loading Data..."):
+        st.markdown(
+            '<p class="head"> DataSet Used In This Project</p>', unsafe_allow_html=True)
+
+        st.markdown("")
+        st.dataframe(df)
+
+        st.markdown(""" 
+        <style>
+            .block{
+                font-family: Book Antiqua; 
+                font-size:24px;
+                 padding-top:11%;
+                font-weight:light;
+                color:lightblue;
+            }
+        </style>
+        """, unsafe_allow_html=True)
+
+        st.markdown('---')
+        cols = st.beta_columns(4)
+        cols[0].markdown(
+            '<p class="block"> Number of Rows : <br> </p>', unsafe_allow_html=True)
+        cols[1].markdown(f"# {df.shape[0]}")
+        cols[2].markdown(
+            '<p class= "block"> Number of Columns : <br></p>', unsafe_allow_html=True)
+        cols[3].markdown(f"# {df.shape[1]}")
+        st.markdown('---')
+
+        st.markdown('<p class= "head"> Summary </p>', unsafe_allow_html=True)
+        st.markdown("")
+        st.dataframe(df.describe())
+        st.markdown('---')
+
+        types = {'object': 'Categorical',
+                 'int64': 'Numerical', 'float64': 'Numerical'}
+        types = list(map(lambda t: types[str(t)], df.dtypes))
+        st.markdown('<p class="head">Dataset Columns</p>',
+                    unsafe_allow_html=True)
+        for col, t in zip(df.columns, types):
+            st.markdown(f"## {col}")
+            cols = st.beta_columns(4)
+            cols[0].markdown('#### Unique Values :')
+            cols[1].markdown(f"## {df[col].unique().size}")
+            cols[2].markdown('#### Type :')
+            cols[3].markdown(f"## {t}")
+            st.markdown("___")
 
 
 def analyseTimeline():
@@ -67,21 +116,23 @@ def analyseTimeline():
 
     col3, col4 = st.beta_columns(2)
 
-    col3.line_chart(analysis.getYearSum())  
+    col3.line_chart(analysis.getYearSum())
     col4.bar_chart(analysis.getYearSum())
 
-    centuries = ['2010 - 2016']
+    centuries = ['1980 - 1990', '1990 - 2000', '2000 - 2010', '2010 - 2020']
 
     popGames = {
-        centuries[0] : ['PS4', 'PC', '3DS', 'XOne']
+        centuries[0]: ['PS4', 'PC', '3DS', 'XOne'],
+        centuries[1]: ['PS4', 'PC', '3DS', 'XOne'],
+        centuries[2]: ['PS4', 'PC', '3DS', 'XOne'],
+        centuries[3]: ['PS4', 'PC', '3DS', 'XOne'],
     }
 
-    selPlatforms = popGames[centuries[0]]
+    selYear = st.selectbox(options=centuries, label="Select Year Interval")
+    selPlatforms = popGames[selYear]
 
-    # st.dataframe(analysis.filterPlatform(selPlatforms))
-
-
-# most profitable platform in different centuries
+    st.dataframe(analysis.filterPlatform(selPlatforms))
+    st.bar_chart(analysis.filterPlatform(selPlatforms))
 
 
 def analysePlatform():
@@ -92,8 +143,6 @@ def analysePlatform():
 
     st.line_chart(analysis.getPlatformSum())
     st.line_chart(analysis.getPlatformCount())
-    
-
 
 
 def analyseRegion():
@@ -127,7 +176,6 @@ def plotpie(labels, values, title):
                          textfont_size=12))
     return fig
 
-    
 
 if selOpt == choices[0]:
     projectOverview()
@@ -139,4 +187,3 @@ elif selOpt == choices[3]:
     analysePlatform()
 elif selOpt == choices[4]:
     analyseRegion()
-
