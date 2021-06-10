@@ -117,6 +117,8 @@ def analyseTimeline():
     col2.bar_chart(analysis.getYearCount())
 
     col3, col4 = st.beta_columns(2)
+    st.markdown('---')
+    st.subheader('Count of Games Released in Years')
 
     col3.line_chart(analysis.getYearSum())
     col4.bar_chart(analysis.getYearSum())
