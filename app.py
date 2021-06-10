@@ -154,6 +154,14 @@ def analysePlatform():
     st.line_chart(analysis.getPlatformSum(selRegion))
     st.line_chart(analysis.getPlatformCount(selRegion))
 
+    selRegion = st.selectbox(
+        options=analysis.getRegions(),  label="Select Region")
+
+    st.bar_chart(analysis.getGenreSum(selRegion))
+
+    st.line_chart(analysis.getGenreSum(selRegion))
+    st.line_chart(analysis.getGenreCount(selRegion))
+
 
 def analyseRegion():
     st.header("Region wise Sales analysis of Video Games")
@@ -197,3 +205,5 @@ elif selOpt == choices[3]:
     analysePlatform()
 elif selOpt == choices[4]:
     analyseRegion()
+elif selOpt == choices[5]:
+    analyseGenre()
