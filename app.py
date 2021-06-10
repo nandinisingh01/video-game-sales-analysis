@@ -1,6 +1,6 @@
 import streamlit as st
 from analysedata import Analyse
-import plotly.graph_objects as go
+from visualization import *
 
 
 def loadData():
@@ -138,15 +138,21 @@ def analyseTimeline():
     st.dataframe(analysis.filterPlatform(selPlatforms))
     st.bar_chart(analysis.filterPlatform(selPlatforms))
 
+    st.plotly_chart(plotMultiLine([analysis.getYearCount(
+    ), analysis.getYearSum()], 'default', 'x', 'y'), use_container_width=True)
+
 
 def analysePlatform():
     st.header("Video Games Platform analysis")
     st.markdown('---')
 
-    st.bar_chart(analysis.getPlatformSum())
+    selRegion = st.selectbox(
+        options=analysis.getRegions(),  label="Select Region")
 
-    st.line_chart(analysis.getPlatformSum())
-    st.line_chart(analysis.getPlatformCount())
+    st.bar_chart(analysis.getPlatformSum(selRegion))
+
+    st.line_chart(analysis.getPlatformSum(selRegion))
+    st.line_chart(analysis.getPlatformCount(selRegion))
 
 
 def analyseRegion():
