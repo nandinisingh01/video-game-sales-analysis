@@ -153,9 +153,7 @@ def analysePlatform():
 
     st.line_chart(analysis.getPlatformSum(selRegion))
     st.line_chart(analysis.getPlatformCount(selRegion))
-
-    selRegion = st.selectbox(
-        options=analysis.getRegions(),  label="Select Region")
+    
 
     st.bar_chart(analysis.getGenreSum(selRegion))
 
