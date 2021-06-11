@@ -153,10 +153,8 @@ def analysePlatform():
 
     st.line_chart(analysis.getPlatformSum(selRegion))
     st.line_chart(analysis.getPlatformCount(selRegion))
-    
 
     st.bar_chart(analysis.getGenreSum(selRegion))
-
     st.line_chart(analysis.getGenreSum(selRegion))
     st.line_chart(analysis.getGenreCount(selRegion))
 
