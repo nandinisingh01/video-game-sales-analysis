@@ -16,7 +16,7 @@ st.image('title_image.jpg')
 sidebar = st.sidebar
 sidebar.header("Choose Your Option")
 choices = ["Select any option below", "View Dataset",
-           "Analyse Timeline", "Analyse Platform", "Analyse Region"]
+           "Analyse Timeline", "Analyse Platform", "Analyse Region", "Analyse Genre"]
 selOpt = sidebar.selectbox("Choose what to do", choices)
 
 
@@ -139,7 +139,7 @@ def analyseTimeline():
     st.bar_chart(analysis.filterPlatform(selPlatforms))
 
     st.plotly_chart(plotMultiLine([analysis.getYearCount(
-    ), analysis.getYearSum()], 'default', 'x', 'y'), use_container_width=True)
+    ), analysis.getYearSum()], 'default', 'x', 'y', ['Count', 'Sum']), use_container_width=True)
 
 
 def analysePlatform():
@@ -154,11 +154,8 @@ def analysePlatform():
     st.line_chart(analysis.getPlatformSum(selRegion))
     st.line_chart(analysis.getPlatformCount(selRegion))
     
+    data = analysis.getPlatformSum(selRegion).head(10)
 
-    st.bar_chart(analysis.getGenreSum(selRegion))
-
-    st.line_chart(analysis.getGenreSum(selRegion))
-    st.line_chart(analysis.getGenreCount(selRegion))
 
 
 def analyseRegion():
@@ -179,6 +176,18 @@ def analyseRegion():
     fig = plotpie(data.index, data.values, 'Total Region Sales')
     st.plotly_chart(fig)
 
+def analyseGenre():
+    st.header('Video Games Genre Analysis')
+    st.markdown('---')
+
+    selRegion = st.selectbox(
+        options=analysis.getRegions(),  label="Select Region")
+
+
+    st.bar_chart(analysis.getGenreSum(selRegion))
+
+    st.line_chart(analysis.getGenreSum(selRegion))
+    st.line_chart(analysis.getGenreCount(selRegion))
 
 def plotpie(labels, values, title):
     layout = go.Layout(title=title)
