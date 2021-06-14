@@ -18,6 +18,12 @@ class Analyse:
     def getPlatformSum(self, region):
         return self.df.groupby('Platform')[region].sum().sort_values(ascending=True)
 
+    def getGenreSum(self, region):
+        return self.df.groupby('Genre')[region].sum().sort_values(ascending=True)
+
+    def getGenreCount(self, region):
+        return self.df.groupby('Genre')[region].count().sort_values(ascending=True)
+
     def getPlatformCount(self, region):
         return self.df.groupby('Platform')[region].count().sort_values(ascending=True)
 

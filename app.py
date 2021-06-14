@@ -16,7 +16,7 @@ st.image('title_image.jpg')
 sidebar = st.sidebar
 sidebar.header("Choose Your Option")
 choices = ["Select any option below", "View Dataset",
-           "Analyse Timeline", "Analyse Platform", "Analyse Region"]
+           "Analyse Timeline", "Analyse Platform", "Analyse Region", "Analyse Genre"]
 selOpt = sidebar.selectbox("Choose what to do", choices)
 
 
@@ -118,7 +118,7 @@ def analyseTimeline():
 
     col3, col4 = st.beta_columns(2)
     st.markdown('---')
-    st.subheader('Count of Games Released in Years')
+    st.subheader('Genral sales of game on diffrent platform')
 
     col3.line_chart(analysis.getYearSum())
     col4.bar_chart(analysis.getYearSum())
@@ -131,20 +131,25 @@ def analyseTimeline():
         centuries[2]: ['PS4', 'PC', '3DS', 'XOne'],
         centuries[3]: ['PS4', 'PC', '3DS', 'XOne'],
     }
-
     selYear = st.selectbox(options=centuries, label="Select Year Interval")
     selPlatforms = popGames[selYear]
 
     st.dataframe(analysis.filterPlatform(selPlatforms))
     st.bar_chart(analysis.filterPlatform(selPlatforms))
 
+    st.markdown('---')
+    st.subheader('Sales and number of released by year')
+
     st.plotly_chart(plotMultiLine([analysis.getYearCount(
-    ), analysis.getYearSum()], 'default', 'x', 'y'), use_container_width=True)
+    ), analysis.getYearSum()], 'default', 'x', 'y', ['Count', 'Sum']), use_container_width=True)
 
 
 def analysePlatform():
     st.header("Video Games Platform analysis")
     st.markdown('---')
+
+    st.markdown('---')
+    st.subheader('Genral sales of game on different Platforms')
 
     selRegion = st.selectbox(
         options=analysis.getRegions(),  label="Select Region")
@@ -153,10 +158,11 @@ def analysePlatform():
 
     st.line_chart(analysis.getPlatformSum(selRegion))
     st.line_chart(analysis.getPlatformCount(selRegion))
+    
+    data = analysis.getPlatformSum(selRegion).head(10)
+    fig = plotpie(data.index, data.values, 'Total Region Sales')
+    st.plotly_chart(fig)
 
-    st.bar_chart(analysis.getGenreSum(selRegion))
-    st.line_chart(analysis.getGenreSum(selRegion))
-    st.line_chart(analysis.getGenreCount(selRegion))
 
 
 def analyseRegion():
@@ -177,6 +183,18 @@ def analyseRegion():
     fig = plotpie(data.index, data.values, 'Total Region Sales')
     st.plotly_chart(fig)
 
+def analyseGenre():
+    st.header('Video Games Genre Analysis')
+    st.markdown('---')
+
+    selRegion = st.selectbox(
+        options=analysis.getRegions(),  label="Select Region")
+
+
+    st.bar_chart(analysis.getGenreSum(selRegion))
+
+    st.line_chart(analysis.getGenreSum(selRegion))
+    st.line_chart(analysis.getGenreCount(selRegion))
 
 def plotpie(labels, values, title):
     layout = go.Layout(title=title)
