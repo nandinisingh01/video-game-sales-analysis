@@ -118,7 +118,7 @@ def analyseTimeline():
 
     col3, col4 = st.beta_columns(2)
     st.markdown('---')
-    st.subheader('Genral sales of game on diffrent platform')
+    st.subheader('General sales of game on different platform')
 
     col3.line_chart(analysis.getYearSum())
     col4.bar_chart(analysis.getYearSum())
@@ -134,7 +134,7 @@ def analyseTimeline():
     selYear = st.selectbox(options=centuries, label="Select Year Interval")
     selPlatforms = popGames[selYear]
 
-    st.dataframe(analysis.filterPlatform(selPlatforms))
+    # st.dataframe(analysis.filterPlatform(selPlatforms))
     st.bar_chart(analysis.filterPlatform(selPlatforms))
 
     st.markdown('---')
@@ -162,11 +162,11 @@ def analysePlatform():
     st.subheader('Line chart showing total count games')
 
     st.line_chart(analysis.getPlatformCount(selRegion))
-    
+
     data = analysis.getPlatformSum(selRegion).head(10)
+    # st.dataframe(data)
     fig = plotpie(data.index, data.values, 'Total Region Sales')
     st.plotly_chart(fig)
-
 
 
 def analyseRegion():
@@ -188,6 +188,7 @@ def analyseRegion():
     fig = plotpie(data.index, data.values, 'Total Region Sales')
     st.plotly_chart(fig)
 
+
 def analyseGenre():
     st.header('Video Games Genre Analysis')
     st.markdown('---')
@@ -195,11 +196,11 @@ def analyseGenre():
     selRegion = st.selectbox(
         options=analysis.getRegions(),  label="Select Region")
 
-
     st.bar_chart(analysis.getGenreSum(selRegion))
 
     st.line_chart(analysis.getGenreSum(selRegion))
     st.line_chart(analysis.getGenreCount(selRegion))
+
 
 def plotpie(labels, values, title):
     layout = go.Layout(title=title)
