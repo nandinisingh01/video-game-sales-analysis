@@ -11,7 +11,7 @@ def loadData():
 analysis = loadData()
 
 st.title("Video Game Sales Analysis")
-st.image('title_image.jpg')
+st.image('title.image.jpg')
 
 sidebar = st.sidebar
 sidebar.header("Choose Your Option")
@@ -39,15 +39,6 @@ def projectOverview():
         social networks, smartphones and tablets introduced new categories such as mobile and social games
         Video games have come a long way since the first games emerged in the 1970s. Today’s video games offer
         photorealistic graphics and simulate reality to a degree which is astonishing in many cases.
-    """)
-    st.markdown("""
-        ### STATISTICS ON THE TOPIC
-        1. Global overview
-        2. U.S. overview
-        3. Market leaders
-        4. Hardware market and ownership
-        5. Software
-        6. consumer behavior
     """)
     st.image('game sales.jpg')
 
@@ -171,17 +162,22 @@ def analysePlatform():
 
 def analyseRegion():
     st.header("Region wise Sales analysis of Video Games")
-    st.subheader('Analysis of top game by region')
+    st.subheader('Analysis of different with respect to publisher')
     n = st.select_slider(
         options=[i*5 for i in range(1, 11)], label="Select No. of Games")
     selRegion = st.selectbox(options=[
         'NA_Sales', 'EU_Sales', 'JP_Sales', 'Other_Sales', 'Global_Sales', ], label="Select Region")
+    st.subheader('Bar chart of showing sum of revenue earn by games')
     st.bar_chart(analysis.getRegionAndPlatformSum(selRegion, n))
 
+    st.subheader('Bar chart of showing count of games')
     st.bar_chart(analysis.getRegionAndPlatformCount(selRegion, n))
 
+    st.header('Analysis of different with respect to publisher')
+    st.subheader('Bar chart of showing sum of revenue earn by games')
     st.bar_chart(analysis.getRegionAndPublisherSum(selRegion, n))
 
+    st.subheader('Bar chart of showing count of games')
     st.bar_chart(analysis.getRegionAndPublisherCount(selRegion, n))
 
     data = analysis.getRegionSum()
@@ -193,12 +189,16 @@ def analyseGenre():
     st.header('Video Games Genre Analysis')
     st.markdown('---')
 
+    st.header('Analysis of different game Genre sales on the basis of region')
     selRegion = st.selectbox(
         options=analysis.getRegions(),  label="Select Region")
 
+    st.subheader('Bar chart showing total sum of revenue earn by games')
     st.bar_chart(analysis.getGenreSum(selRegion))
 
+    st.subheader('Line chart showing total sum of revenue earn by games')
     st.line_chart(analysis.getGenreSum(selRegion))
+    st.subheader('Line chart showing total count of region')
     st.line_chart(analysis.getGenreCount(selRegion))
 
 
