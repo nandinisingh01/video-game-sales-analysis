@@ -148,15 +148,19 @@ def analysePlatform():
     st.header("Video Games Platform analysis")
     st.markdown('---')
 
-    st.markdown('---')
-    st.subheader('Genral sales of game on different Platforms')
+    st.header('Analysis of different game platform sales on the basis of region')
 
     selRegion = st.selectbox(
         options=analysis.getRegions(),  label="Select Region")
 
+    st.subheader('Bar chart showing total sum of revenue earn by games')
     st.bar_chart(analysis.getPlatformSum(selRegion))
 
+    st.subheader('Line chart showing total sum of revenue earn by games')
     st.line_chart(analysis.getPlatformSum(selRegion))
+    
+    st.subheader('Line chart showing total count games')
+
     st.line_chart(analysis.getPlatformCount(selRegion))
     
     data = analysis.getPlatformSum(selRegion).head(10)
@@ -167,6 +171,7 @@ def analysePlatform():
 
 def analyseRegion():
     st.header("Region wise Sales analysis of Video Games")
+    st.subheader('Analysis of top game by region')
     n = st.select_slider(
         options=[i*5 for i in range(1, 11)], label="Select No. of Games")
     selRegion = st.selectbox(options=[
