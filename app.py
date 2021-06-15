@@ -14,6 +14,7 @@ st.title("Video Game Sales Analysis")
 st.image('title.image.jpg')
 
 sidebar = st.sidebar
+sidebar.header("Video Game Sales Analysis")
 sidebar.header("Choose Your Option")
 choices = ["Select any option below", "View Dataset",
            "Analyse Timeline", "Analyse Platform", "Analyse Region", "Analyse Genre"]
@@ -115,6 +116,7 @@ def analyseTimeline():
     col3.line_chart(analysis.getYearSum())
     col4.bar_chart(analysis.getYearSum())
 
+    st.subheader('Top 4 most popular games in different dicats')
     centuries = ['1980 - 1990', '1990 - 2000', '2000 - 2010', '2010 - 2020']
 
     popGames = {
@@ -130,7 +132,7 @@ def analyseTimeline():
     st.bar_chart(analysis.filterPlatform(selPlatforms))
 
     st.markdown('---')
-    st.subheader('Sales and number of released by year')
+    st.subheader('Sales and number of game released by year')
 
     st.plotly_chart(plotMultiLine([analysis.getYearCount(
     ), analysis.getYearSum()], 'default', 'x', 'y', ['Count', 'Sum']), use_container_width=True)
@@ -145,13 +147,13 @@ def analysePlatform():
     selRegion = st.selectbox(
         options=analysis.getRegions(),  label="Select Region")
 
-    st.subheader('Bar chart showing total sum of revenue earn by games (in Billion $)')
+    st.subheader('Bar chart showing total sum of revenue earned by games (in Billion $)')
     st.bar_chart(analysis.getPlatformSum(selRegion))
 
-    st.subheader('Line chart showing total sum of revenue earn by games')
+    st.subheader('Line chart showing total sum of revenue earned by games (in Billion $)')
     st.line_chart(analysis.getPlatformSum(selRegion))
 
-    st.subheader('Line chart showing total count games')
+    st.subheader('Line chart showing total count games(in Billion $)')
 
     st.line_chart(analysis.getPlatformCount(selRegion))
 
@@ -163,22 +165,22 @@ def analysePlatform():
 
 def analyseRegion():
     st.header("Region wise Sales analysis of Video Games")
-    st.subheader('Analysis of different with respect to publisher')
+    st.subheader('Analysis of different region with respect to publisher')
     n = st.select_slider(
         options=[i*5 for i in range(1, 11)], label="Select No. of Games")
     selRegion = st.selectbox(options=[
         'NA_Sales', 'EU_Sales', 'JP_Sales', 'Other_Sales', 'Global_Sales', ], label="Select Region")
-    st.subheader('Bar chart of showing sum of revenue earn by games')
+    st.subheader('Bar chart of showing sum of revenue earned by games (in Billion $)')
     st.bar_chart(analysis.getRegionAndPlatformSum(selRegion, n))
 
-    st.subheader('Bar chart of showing count of games')
+    st.subheader('Bar chart of showing count of games(in Billion $)')
     st.bar_chart(analysis.getRegionAndPlatformCount(selRegion, n))
 
-    st.header('Analysis of different with respect to publisher')
-    st.subheader('Bar chart of showing sum of revenue earn by games')
+    st.header('Analysis of different region with respect to publisher')
+    st.subheader('Bar chart of showing sum of revenue earned by games (in Billion $)')
     st.bar_chart(analysis.getRegionAndPublisherSum(selRegion, n))
 
-    st.subheader('Bar chart of showing count of games')
+    st.subheader('Bar chart of showing count of games (in Billion $)')
     st.bar_chart(analysis.getRegionAndPublisherCount(selRegion, n))
 
     data = analysis.getRegionSum()
@@ -194,12 +196,12 @@ def analyseGenre():
     selRegion = st.selectbox(
         options=analysis.getRegions(),  label="Select Region")
 
-    st.subheader('Bar chart showing total sum of revenue earn by games')
+    st.subheader('Bar chart showing total sum of revenue earned by games (in Billion $)')
     st.bar_chart(analysis.getGenreSum(selRegion))
 
-    st.subheader('Line chart showing total sum of revenue earn by games')
+    st.subheader('Line chart showing total sum of revenue earned by games (in Billion $)')
     st.line_chart(analysis.getGenreSum(selRegion))
-    st.subheader('Line chart showing total count of region')
+    st.subheader('Line chart showing total count of game (in Billion $)')
     st.line_chart(analysis.getGenreCount(selRegion))
 
 
