@@ -100,16 +100,17 @@ def analyseTimeline():
     st.header("Timeline analysis")
     st.markdown('---')
 
+    st.subheader('Count of Games Released in Years')
     col1, col2 = st.beta_columns(2)
 
     st.markdown('---')
-    st.subheader('Count of Games Released in Years')
+
     col1.line_chart(analysis.getYearCount())
     col2.bar_chart(analysis.getYearCount())
 
+    st.subheader('General sales of game on different platform')
     col3, col4 = st.beta_columns(2)
     st.markdown('---')
-    st.subheader('General sales of game on different platform')
 
     col3.line_chart(analysis.getYearSum())
     col4.bar_chart(analysis.getYearSum())
@@ -144,12 +145,12 @@ def analysePlatform():
     selRegion = st.selectbox(
         options=analysis.getRegions(),  label="Select Region")
 
-    st.subheader('Bar chart showing total sum of revenue earn by games')
+    st.subheader('Bar chart showing total sum of revenue earn by games (in Billion $)')
     st.bar_chart(analysis.getPlatformSum(selRegion))
 
     st.subheader('Line chart showing total sum of revenue earn by games')
     st.line_chart(analysis.getPlatformSum(selRegion))
-    
+
     st.subheader('Line chart showing total count games')
 
     st.line_chart(analysis.getPlatformCount(selRegion))
