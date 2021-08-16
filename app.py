@@ -116,7 +116,7 @@ def analyseTimeline():
     col3.line_chart(analysis.getYearSum())
     col4.bar_chart(analysis.getYearSum())
 
-    st.subheader('Top 4 most popular games in different dicats')
+    st.subheader('Top 4 most popular games in different decade')
     centuries = ['1980 - 1990', '1990 - 2000', '2000 - 2010', '2010 - 2020']
 
     popGames = {
@@ -133,9 +133,9 @@ def analyseTimeline():
 
     st.markdown('---')
     st.subheader('Sales and number of game released by year')
-
+    st.subheader('Count of game released v/s sum of revenue earned number of game')
     st.plotly_chart(plotMultiLine([analysis.getYearCount(
-    ), analysis.getYearSum()], 'default', 'x', 'y', ['Count', 'Sum']), use_container_width=True)
+    ), analysis.getYearSum()], 'default', 'number of year', 'number of game', ['Count', 'Sum']), use_container_width=True)
 
 
 def analysePlatform():
